@@ -14,14 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.style.display = 'none';
             });
 
-            // Réduire le texte du bouton de musique pour les très petits écrans
-            const playButton = document.getElementById('play-music');
-            if (playButton.textContent.includes('The Final Countdown')) {
-                playButton.innerHTML = '<i class="fas fa-play"></i> Jouer';
-            }
+            // Réduire le texte des boutons pour les très petits écrans
+            const confettiBtn = document.getElementById('confetti-btn');
+            confettiBtn.innerHTML = '<i class="fas fa-magic"></i>';
 
-            const pauseButton = document.getElementById('pause-music');
-            pauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         }
     }
 
@@ -34,11 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const hoursElement = document.getElementById('hours');
     const minutesElement = document.getElementById('minutes');
     const secondsElement = document.getElementById('seconds');
-
-    // Éléments audio
-    const music = document.getElementById('countdown-music');
-    const playButton = document.getElementById('play-music');
-    const pauseButton = document.getElementById('pause-music');
 
     // Mise à jour du compte à rebours
     function updateCountdown() {
@@ -78,8 +71,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Afficher un message de départ
             document.querySelector('.countdown-container').innerHTML += '<div class="departure-message">Bon voyage au Maroc!</div>';
 
-            // Jouer automatiquement la musique
-            playMusic();
+            // Lancer les confettis automatiquement
+            launchConfetti();
         }
     }
 
@@ -89,66 +82,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // Appeler la fonction une fois pour éviter le délai initial
     updateCountdown();
 
-    // Fonctions pour la musique
-    function playMusic() {
-        music.play().catch(error => {
-            console.log("Lecture automatique bloquée par le navigateur:", error);
+    // Fonction pour lancer les confettis
+    function launchConfetti() {
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff6b6b', '#4ecdc4', '#ffe66d', '#ff9a3c', '#6a0572']
         });
-        playButton.classList.add('hidden');
-        pauseButton.classList.remove('hidden');
     }
 
-    function pauseMusic() {
-        music.pause();
-        pauseButton.classList.add('hidden');
-        playButton.classList.remove('hidden');
-    }
+    // Bouton pour lancer les confettis
+    const confettiBtn = document.getElementById('confetti-btn');
+    confettiBtn.addEventListener('click', function() {
+        launchConfetti();
 
-    // Essayer de jouer la musique automatiquement
-    try {
-        // Tentative de lecture automatique
-        playMusic();
-
-        // Ajouter un message pour informer l'utilisateur si la musique est bloquée
-        const musicMessage = document.createElement('div');
-        musicMessage.className = 'music-message';
-
-        // Message adapté à la taille de l'écran
-        if (window.innerWidth <= 320) {
-            musicMessage.innerHTML = 'Cliquez pour activer la musique';
-        } else {
-            musicMessage.innerHTML = 'Si vous n\'entendez pas la musique, cliquez sur le bouton "Jouer" ou n\'importe où sur la page';
-        }
-
-        document.querySelector('.music-controls').appendChild(musicMessage);
-
-        // Supprimer le message après 5 secondes si la musique joue
+        // Animation du bouton
+        this.classList.add('animate__animated', 'animate__rubberBand');
         setTimeout(() => {
-            if (!music.paused) {
-                musicMessage.remove();
-            }
-        }, 5000);
+            this.classList.remove('animate__animated', 'animate__rubberBand');
+        }, 1000);
+    });
 
-        // Ajouter des gestionnaires d'événements pour démarrer la musique lors de l'interaction utilisateur
-        const startMusicOnInteraction = () => {
-            playMusic();
-            // Supprimer les gestionnaires d'événements une fois la musique démarrée
-            document.removeEventListener('click', startMusicOnInteraction);
-            document.removeEventListener('keydown', startMusicOnInteraction);
-            document.removeEventListener('touchstart', startMusicOnInteraction);
-        };
+    // Basculer le mode nuit
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
 
-        // Ajouter des gestionnaires pour différents types d'interactions
-        document.addEventListener('click', startMusicOnInteraction);
-        document.addEventListener('keydown', startMusicOnInteraction);
-        document.addEventListener('touchstart', startMusicOnInteraction);
-    } catch (error) {
-        console.log("Erreur lors de la lecture automatique:", error);
-    }
-
-    // Événements pour les boutons de musique
-    playButton.addEventListener('click', playMusic);
-    pauseButton.addEventListener('click', pauseMusic);
+        // Changer l'icône du bouton
+        const icon = this.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            this.setAttribute('title', 'Mode jour');
+        } else {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            this.setAttribute('title', 'Mode nuit');
+        }
+    });
 
     // Animation du chameau
     const camel = document.querySelector('.camel');
@@ -167,4 +139,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Démarrer l'animation du chameau
     animateCamel();
+
+    // Ajouter des faits amusants sur le Maroc
+    const funFacts = [
+        "Le Maroc est connu pour ses magnifiques médinas, ses souks colorés et sa délicieuse cuisine!",
+        "Le Maroc est le seul pays d'Afrique à avoir une côte sur l'océan Atlantique et la mer Méditerranée.",
+        "Le thé à la menthe est la boisson nationale du Maroc et est servi avec beaucoup de sucre!",
+        "Le Maroc possède la plus ancienne université du monde encore en activité, fondée en 859.",
+        "Le désert du Sahara couvre une grande partie du sud-est du Maroc.",
+        "Le couscous est traditionnellement mangé le vendredi au Maroc.",
+        "Casablanca est la plus grande ville du Maroc et un important centre économique."
+    ];
+
+    // Changer le fait amusant toutes les 10 secondes
+    const funFactElement = document.querySelector('.fun-fact p');
+    let currentFactIndex = 0;
+
+    function changeFunFact() {
+        currentFactIndex = (currentFactIndex + 1) % funFacts.length;
+        funFactElement.innerHTML = `<i class="fas fa-lightbulb"></i> Le saviez-vous? ${funFacts[currentFactIndex]}`;
+        funFactElement.classList.add('animate__animated', 'animate__fadeIn');
+        setTimeout(() => {
+            funFactElement.classList.remove('animate__animated', 'animate__fadeIn');
+        }, 1000);
+    }
+
+    // Changer le fait amusant au clic
+    document.querySelector('.fun-fact').addEventListener('click', changeFunFact);
+
+    // Changer automatiquement le fait amusant
+    setInterval(changeFunFact, 10000);
 });

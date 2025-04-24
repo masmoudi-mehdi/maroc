@@ -9,10 +9,11 @@
     <title>Départ pour le Maroc - Compte à rebours</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Départ pour le Maroc</h1>
+        <h1 class="animate__animated animate__bounce">Départ pour le Maroc</h1>
         <div class="countdown-container">
             <div class="countdown-header">
                 <i class="fas fa-plane"></i>
@@ -39,20 +40,28 @@
             </div>
         </div>
 
-        <div class="music-controls">
-            <button id="play-music" class="music-btn">
-                <i class="fas fa-play"></i> Jouer "The Final Countdown"
+        <div class="fun-controls">
+            <button id="confetti-btn" class="fun-btn">
+                <i class="fas fa-magic"></i> Lancer les confettis!
             </button>
-            <button id="pause-music" class="music-btn hidden">
-                <i class="fas fa-pause"></i> Pause
+            <button id="theme-toggle" class="fun-btn">
+                <i class="fas fa-moon"></i> Mode nuit
             </button>
         </div>
 
         <div class="morocco-info">
-            <h2>Nouvelle aventure au Maroc!</h2>
+            <h2 class="floating">Nouvelle aventure au Maroc!</h2>
             <div class="morocco-animation">
                 <div class="camel"></div>
                 <div class="palm-tree"></div>
+                <div class="sun"></div>
+                <div class="cloud cloud1"></div>
+                <div class="cloud cloud2"></div>
+                <div class="cactus"></div>
+                <div class="sand-dune"></div>
+            </div>
+            <div class="fun-fact">
+                <p><i class="fas fa-lightbulb"></i> Le saviez-vous? Le Maroc est connu pour ses magnifiques médinas, ses souks colorés et sa délicieuse cuisine!</p>
             </div>
         </div>
     </div>
@@ -61,13 +70,8 @@
         <p>À bientôt au Maroc! 🌴🐪☀️</p>
     </footer>
 
-    <audio id="countdown-music" preload="auto" autoplay loop>
-        <!-- Lien vers une version libre de droits de "The Final Countdown" -->
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        <!-- Remplacez l'URL ci-dessus par votre propre fichier MP3 une fois qu'il est dans le dossier assets -->
-        <!-- <source src="assets/final-countdown.mp3" type="audio/mpeg"> -->
-        Votre navigateur ne supporte pas l'élément audio.
-    </audio>
+    <!-- Scripts pour les fonctionnalités amusantes -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script src="js/script.js"></script>
 </body>
