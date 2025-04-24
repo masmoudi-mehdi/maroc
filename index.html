@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Départ pour le Maroc - Compte à rebours</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Départ pour le Maroc</h1>
+        <div class="countdown-container">
+            <div class="countdown-header">
+                <i class="fas fa-plane"></i>
+                <span>13 Mai 2025 - 05:00</span>
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="countdown">
+                <div class="time-block">
+                    <span id="days">00</span>
+                    <span class="label">Jours</span>
+                </div>
+                <div class="time-block">
+                    <span id="hours">00</span>
+                    <span class="label">Heures</span>
+                </div>
+                <div class="time-block">
+                    <span id="minutes">00</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="time-block">
+                    <span id="seconds">00</span>
+                    <span class="label">Secondes</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="music-controls">
+            <button id="play-music" class="music-btn">
+                <i class="fas fa-play"></i> Jouer "The Final Countdown"
+            </button>
+            <button id="pause-music" class="music-btn hidden">
+                <i class="fas fa-pause"></i> Pause
+            </button>
+        </div>
+
+        <div class="morocco-info">
+            <h2>Nouvelle aventure au Maroc!</h2>
+            <div class="morocco-animation">
+                <div class="camel"></div>
+                <div class="palm-tree"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>À bientôt au Maroc! 🌴🐪☀️</p>
+    </footer>
+
+    <audio id="countdown-music" preload="auto" autoplay loop>
+        <source src="assets/final-countdown.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
